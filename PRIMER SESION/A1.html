@@ -90,13 +90,10 @@
             const link = document.createElement('a'); 
             link.href = urlLibro;
             link.textContent = 'Comprar Libro'; // Le coloca en vez del enlace Comprar Libro (y el enlace lo convierte en un href)
-
             urls.appendChild(link);
             nuevaFila.appendChild(urls);
-
             // AÑADE LA NUEVA FILA 
             tabla.appendChild(nuevaFila);
-
             // LIMPIA LOS CAMPOS DEL FORMULARIO
             document.getElementById('anadirLibroFormulario').reset();
         }
