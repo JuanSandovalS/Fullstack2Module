@@ -25,37 +25,37 @@
             background-color: coral;
             color: #fff;
         }
-        form{
+        form {
             background-color: #ddd;
             text-align: center;
             padding: 10px;
             border-bottom: 4px solid #ddd;
         }
-        form:hover{
+        form:hover {
             background-color: coral;
             color: #fff;
         }
-        button{
+        button {
             border-bottom: 1px solid black;
             padding: 10px;
         }
-        button:hover{
+        button:hover {
             background-color: greenyellow;
-            color:#fff
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
     <h2>AGREGAR LIBROS</h2>
-    <form id="addBookForm">
+    <form id="anadirLibroFormulario">
         <label for="nombreLibro">Nombre del Libro:</label>
         <input type="text" id="nombreLibro" required>
         <label for="descripcionLibro">Descripción del Libro:</label>
         <input type="text" id="descripcionLibro" required>
         <label for="urlLibro">URL:</label>
         <input type="url" id="urlLibro" required>
-        <button type="button" onclick="addBook()">Añadir a la Tabla</button>
+        <button type="button" onclick="anadirlibro()">Añadir a la Tabla</button>
     </form>
 
     <h2>CATÁLOGO DE LIBROS</h2>
@@ -68,33 +68,37 @@
     </table>
     
     <script>
-        function addBook() {
+        function anadirlibro() {
             // OBTIENE DATOS DEL FORMULARIO 
             const nombreLibro = document.getElementById('nombreLibro').value;
             const descripcionLibro = document.getElementById('descripcionLibro').value;
             const urlLibro = document.getElementById('urlLibro').value;
 
             // CREA FILAS Y COLUMNAS NUEVAS
-            const table = document.getElementById('librosTable');
-            const newRow = document.createElement('tr');
-            const nombreCell = document.createElement('td');
+            const tabla = document.getElementById('librosTable');
+            const nuevaFila = document.createElement('tr');
 
-            nombreCell.textContent = nombreLibro;
-            newRow.appendChild(nombreCell);
-            const descripcionCell = document.createElement('td'); //guarda el nombrelibro en el primer espacio del td
+            const nombre = document.createElement('td');
+            nombre.textContent = nombreLibro;
+            nuevaFila.appendChild(nombre);
 
-            descripcionCell.textContent = descripcionLibro;
-            newRow.appendChild(descripcionCell);
-            const urlCell = document.createElement('td'); //guarda descripcionLibro en el segundo espacio del td
+            const descripcion = document.createElement('td'); 
+            descripcion.textContent = descripcionLibro;
+            nuevaFila.appendChild(descripcion);
 
-            const link = document.createElement('a'); //guarda comprar libro en el tercer espacio del td
+            const urls = document.createElement('td'); 
+            const link = document.createElement('a'); 
             link.href = urlLibro;
-            link.textContent = 'Comprar Libro'; //le coloca en vez del enlace Comprar Libro (y el enlace lo convierte en un href)
+            link.textContent = 'Comprar Libro'; // Le coloca en vez del enlace Comprar Libro (y el enlace lo convierte en un href)
 
-            urlCell.appendChild(link);
-            newRow.appendChild(urlCell);
-           table.appendChild(newRow);// AÑADE LA NUEVA FILA 
-            document.getElementById('addBookForm').reset();
+            urls.appendChild(link);
+            nuevaFila.appendChild(urls);
+
+            // AÑADE LA NUEVA FILA 
+            tabla.appendChild(nuevaFila);
+
+            // LIMPIA LOS CAMPOS DEL FORMULARIO
+            document.getElementById('anadirLibroFormulario').reset();
         }
     </script>
 </body>
