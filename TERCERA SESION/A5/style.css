@@ -1,17 +1,46 @@
-.galeria{
-    width: 100%;
+
+.noticia1{
+    grid-area: NoticaPrincipal;
+}
+
+.noticia2{
+    grid-area: NoticaSecundaria;
+}
+
+.noticia3{
+    grid-area: NoticaTerciaria;
+}
+
+.noticia4{
+    grid-area: NoticiaCuarta;
+}
+/*aqui terminar el codigo para poner alias a las clases*/
+
+#informacionSitio{
+    width: 70%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    }
-    .foto{
-    width: 100%;
-    margin-bottom: 50px;
-    }
-    @media screen and (max-width:480px) {
+    /*teplate-areas nos permite establecer el formato de la tabla, insertando clases de CSS como celdas */
+    grid-template-areas: 'noticiaprincipal noticiaprincipal noticiaprincipal'
+                         'noticiasecundaria noticiaterciaria noticiacuarta';
+}
 
-    .galeria{
-        margin: 0;
-        grid-template-columns: 50% 50%;
+.ajustarImagen{
+    width: 50%;
+    float: left;
+}
+@media screen and (max-witdh:480px) {
+    #informacionSitio{
+        width: 100%;
+        grid-template-areas: 'noticiaprincipal'
+                            'noticiasecundaria' 
+                            'noticiaterciario' 
+                            'noticiacuarto';
+    }
+}
+@media screen and (max-width: 480px){
+    .ajustarImagen{
+        width: 100%;
+        float:top;
     }
 }
