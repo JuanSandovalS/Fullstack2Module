@@ -1,0 +1,55 @@
+.ico_principal{
+    width: 180px;
+}
+body{
+    margin: 0 auto;
+}
+#InformaciónSistio {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 'NoticiaPrincipla NoticiaPrincipla NoticiaPrincipla' 
+                        'NoticiaSecundaria NoticiaTerciaria NoticiaCuartaria';
+}
+.AjustarImagen {
+    width: 50%;
+    float: left;
+}
+.noticia1 {
+    grid-area: noticiaPrincipal;
+}
+.noticia2{
+    grid-area: noticiaSecundaria;
+}
+
+.noticia3{
+    grid-area: noticiaTerciario;
+}
+
+.noticia4{
+    grid-area: noticiaCuarto;
+}
+#informacionSitio{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: grid;
+    grid-template-areas: 'noticiaPrincipal noticiaPrincipal noticiaPrincipal'
+                        'noticiaSecundaria noticiaTerciario noticiaCuarto';
+}
+.ajustarImagen{
+    width: 50%;
+    float: left;
+}
+@media screen and (max-width:480px){
+    #informacionSitio{
+        width: 100%;
+        grid-template-areas: 'noticiaPrincipal'
+                            'noticiaSecundaria'
+                            'noticiaTerciario'
+                            'noticiaCuarto';
+    }
+    .ajustarImagen{
+        width: 100%;
+    } 
+}
