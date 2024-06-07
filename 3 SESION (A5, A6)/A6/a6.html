@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Fotografía</title>
+    <style>
+        .boton {
+            background-color: #28b24b;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 16px;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            box-shadow: 0 4px 0 0 #20732f, 0 0 15px 3px #fff;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .galeria {
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+        }
+
+        .imagen {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+
+        .galeriaColumna {
+            width: 100%;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 100%;
+        }
+
+        @media screen and (max-width: 480px) {
+            .galeria {
+                margin: 0;
+                grid-template-columns: 50% 50%;
+            }
+            .galeriaColumna {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecciona una imagen e indica el número de veces a repetir</h1>
+    <input type="file" id="campoFoto" accept="image/*"> <br>
+    
+    <label for="cambiar">¿En una columna?</label>
+    <input type="checkbox" onclick="cambiarColumna()" id="cambiar">
+    <button class="boton" onclick="duplicarImagen()">Repetir</button>
+    
+    <div class="galeria" id="contenedorImagenes"></div><br>
+</body>
+<script>
+    function duplicarImagen() {
+        var campoImagen = document.getElementById("campoFoto");
+
+        if (campoImagen.files.length === 0) {
+            alert("Debe seleccionar una imagen");
+            return;
+        }
+
+        var contenedor = document.getElementById("contenedorImagenes");
+
+        // Método para obtener la imagen seleccionada.
+        var imagenSeleccionada = campoImagen.files[0];
+        // Obtener la URL o la ubicación de la imagen.
+        var urlImagen = URL.createObjectURL(imagenSeleccionada);
+
+        // Procedemos con el ciclo.
+        var nuevaImagen = document.createElement("img");
+        nuevaImagen.src = urlImagen;
+        nuevaImagen.setAttribute("class", "imagen");
+        // Cargamos las imágenes al div donde aparecerán las imágenes.
+        contenedor.appendChild(nuevaImagen);
+    }
+
+    function cambiarColumna() {
+        var esColumna = document.getElementById('cambiar').checked;
+        var contenedor = document.getElementById('contenedorImagenes');
+
+        if (esColumna) {
+            contenedor.setAttribute("class", "galeriaColumna");
+        } else {
+            contenedor.setAttribute("class", "galeria");
+        }
+    }
+</script>
+</html>
