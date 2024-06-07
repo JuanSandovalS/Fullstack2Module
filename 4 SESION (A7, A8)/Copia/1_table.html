@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TablaHTML - JAVASCRIPT</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+    <h2>Agregar Datos</h2>
+    <label for="NomLibro">Nombre del Libro</label>
+    <input type="text" id="NomLibro" placeholder="Nombre del Libro"><br><br>
+
+    <label for="Desc">Descripción</label>
+    <input type="text" id="Desc" placeholder="Descripción"><br><br>
+
+    <label for="Compra">Compra</label>
+    <input type="text" id="Compra" placeholder="URL"><br><br>
+
+    <button class="btn btn-danger" onclick="ComprarLibros()">Agregar</button><br><br>
+
+    <table class="table table-striped"  >
+        <tbody id="TablaLibros">
+            <tr>
+                <th>Libro</th>
+                <th>Descripción del Libro</th>
+                <th>Comprar</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <script>
+        function ComprarLibros(){
+            var NombreLibro = document.getElementById("NomLibro").value;
+            var Descripción = document.getElementById("Desc").value;
+            var CompraURL = document.getElementById("Compra").value;
+            var nuevaFila = document.createElement("tr")
+
+            for(var contador=0; contador<3; contador++){
+                var celda = document.createElement("td")
+
+                if(contador===0){
+                    celda.textContent = NombreLibro;
+                }
+                nuevaFila.appendChild(celda)
+
+            for(var contador=1; contador<3; contador++){
+                var celda1 = document.createElement("td")
+
+                if(contador===1){
+                    celda1.textContent = Descripción;
+                }
+                nuevaFila.appendChild(celda1)
+
+            for(var contador=2; contador<3; contador++){
+                var celda2 = document.createElement("td")
+                var URL = document.createElement("a")
+                
+                if(contador===2){
+                    URL.setAttribute("href", CompraURL)
+                    URL.textContent = CompraURL;
+                    celda2.appendChild(URL)
+                }
+                nuevaFila.appendChild(celda2)
+            }
+            document.getElementById("TablaLibros").appendChild(nuevaFila)
+        }
+    }
+}
+    </script>
+</body>
+</html>
