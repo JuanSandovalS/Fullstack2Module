@@ -1,0 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.bg-enc{
+    background: linear-gradient(90deg, rgba(0,63,103,1) 0%, rgba(0,212,255,1)100%);
+}
