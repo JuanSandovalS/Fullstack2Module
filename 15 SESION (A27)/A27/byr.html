@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Propiedades</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background: linear-gradient(90deg, rgba(0,63,103,1) 0%, rgba(0,212,255,1) 100%);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+        .close-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Propiedades</a>
+        <button class="btn btn-primary ml-auto" onclick="openModal()">Agregar Propiedad</button>
+    </nav>
+
+    <div class="modal" id="propertyModal">
+        <div class="modal-content">
+            <h2>Agregar Casa o Terreno</h2>
+            <form id="propertyForm">
+                <div class="form-group">
+                    <label for="propertyType">Tipo de propiedad</label>
+                    <select id="propertyType" class="form-control" required>
+                        <option value="casa">Casa</option>
+                        <option value="terreno">Terreno</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="propertyPrice">Precio de la propiedad</label>
+                    <input type="number" id="propertyPrice" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="propertyYears">Cantidad de años</label>
+                    <input type="number" id="propertyYears" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="propertyImage">Fotografía</label>
+                    <input type="file" id="propertyImage" class="form-control-file" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                    <button type="button" class="btn btn-danger" onclick="closeModal()">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-5" id="cardsContainer">
+        <h2>Propiedades</h2>
+        <div class="row" id="cardsRow">
+            <!-- Las tarjetas de propiedades se agregarán aquí -->
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('propertyModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('propertyModal').style.display = 'none';
+        }
+
+        document.getElementById('propertyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const type = document.getElementById('propertyType').value;
+            const price = parseFloat(document.getElementById('propertyPrice').value);
+            const years = parseInt(document.getElementById('propertyYears').value);
+            const image = document.getElementById('propertyImage').files[0];
+
+            if (!price || !years || !image) {
+                alert('Por favor, complete todos los campos.');
+                return;
+            }
+
+            const interestMonetary = years * 0.4;
+            const totalInterest = price * interestMonetary;
+            const totalCredit = totalInterest + price;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageUrl = e.target.result;
+                const card = document.createElement('div');
+                card.className = 'col-md-4 mb-4';
+                card.innerHTML = `
+                    <div class="card">
+                        <img src="${imageUrl}" class="card-img-top" alt="Imagen de la propiedad">
+                        <div class="card-body">
+                            <h5 class="card-title">${type.charAt(0).toUpperCase() + type.slice(1)}</h5>
+                            <p class="card-text">Precio original: $${price.toFixed(2)}</p>
+                            <p class="card-text">Cantidad de años: ${years}</p>
+                            <p class="card-text">Interés Monetario: $${interestMonetary.toFixed(2)}</p>
+                            <p class="card-text">Interés Total: $${totalInterest.toFixed(2)}</p>
+                            <p class="card-text">Total crédito: $${totalCredit.toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('cardsRow').appendChild(card);
+                closeModal();
+            };
+            reader.readAsDataURL(image);
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
